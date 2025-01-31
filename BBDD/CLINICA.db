@@ -1,0 +1,40 @@
+ CREATE TABLE Paciente (
+	Id_Paciente INT PRIMARY KEY NOT NULL,
+	Nombre VARCHAR (20) NOT NULL,
+	Apellido VARCHAR(50) NOT NULL,	
+	DNI VARCHAR(10) NOT NULL,
+	Fecha_Nac DATE,
+	Correo VARCHAR(50) NOT NULL,
+	Contraseña VARCHAR(50) NOT NULL
+	);
+
+CREATE TABLE Consulta(
+	Id_Consulta INT PRIMARY KEY NOT NULL,
+	Fecha DATE,
+	Hora INT,
+	);
+
+CREATE TABLE Medico (
+	Id_Medico INT PRIMARY KEY NOT NULL,
+	Nombre VARCHAR(20) NOT NULL,
+ 	Apellido VARCHAR(50) NOT NULL,	
+	DNI VARCHAR(10) NOT NULL,
+	Fecha_Nac DATE
+	);
+
+CREATE TABLE Especialidad (
+	Id_Especialidad INT PRIMARY KEY NOT NULL,
+	Nombre VARCHAR(20) NOT NULL,
+	);
+	
+ALTER TABLE Consulta ADD Id_Paciente INT;
+ALTER TABLE Consulta ADD CONSTRAINT FK_Id_Consulta_Paciente FOREING KEY (Id_Paciente) REFERENCES Paciente (Id_Paciente);
+
+ALTER TABLE Consulta ADD Id_Medico INT;
+ALTER TABLE Consulta ADD CONSTRAINT FK_Id_Consulta_Medico FOREING KEY (Id_Medico) REFERENCES Medico (Id_Medico);	
+
+ALTER TABLE Medico ADD Id_Especialidad INT;
+ALTER TABLE Medico ADD CONSTRAINT FK_Id_Medico_Especialidad FOREING KEY (Id_Especialidad) REFERENCES Especialidad (Id_Especialidad);
+
+ALTER TABLE Especialidad ADD Id_Medico INT;
+ALTER TABLE Especialidad ADD CONSTRAINT FK_Especialidad_Medico FOREING KEY (Id_Medico) REFERENCES Medico(Id_Medico);
