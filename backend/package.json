@@ -1,0 +1,14 @@
+{
+    "name": "clinica",
+    "version": "0.1",
+    "description": "Clinica Aplicacion",
+    "scripts": {
+      "start": "node src/app.js"
+    },
+    "author": "Slilma, Jordi, Javier",
+    "license": "GPL-2.0-only",
+   
+    "dependencies": {
+      "express": "^4.21.1"
+    }
+  }
