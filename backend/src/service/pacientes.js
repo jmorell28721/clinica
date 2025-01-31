@@ -1,42 +1,49 @@
 const db = require('../configuration/database.js').db;
  
-// Operación que devuelve todas las ciudades de la base de datos
+// Operación que devuelve todos los paciente de la base de datos
 const findAllPacientes = (async () => {
-    const result = await db('pacientes').select('*');
+    const result = await db('paciente').select('*');
     return result;
 });
  
-// Operación que devuelve una ciudad determinada
-const findPaciente = (async (cityName) => {
-    const result = await db('clinica').select('*').where({name: cityName}).first();
+// Operación que devuelve una paciente determinado
+const findPaciente = (async (dniPaciente) => {
+    const result = await db('paciente').select('*').where({dni: dniPaciente}).first();
     return result;
 });
  
 // Operación que registra una nueva ciudad en la base de datos
-const registerPaciente = (async (cityName, cityPopulation, cityAltitude) => {
-    const result = await db('clinica').insert({
-        name: cityName,
-        population: cityPopulation,
-        altitude: cityAltitude
-    });
- 
+const registerPaciente = (async (nombrePac, apellidoPac, nacimientoPac, telefonoPac, emailPac, dniPac, usuarioPac, passwordPac) => {
+    const result = await db('paciente').insert({
+        nombre: nombrePac,
+        apellido: apellidoPac,
+        nacimiento: nacimientoPac,
+        telefono: telefonoPac,
+        email:emailPac,
+        dni: dniPac,
+        usuario: usuarioPac,
+        password: passwordPac
+    }); 
     return result;
 });
  
-// Operación que modifica una ciudad en la base de datos
-const modifyPaciente = (async (cityName, cityPopulation, cityAltitude) => {
-    const result = await db('clinica').where({ name: cityName }).update({
-        population: cityPopulation,
-        altitude: cityAltitude
-    });
- 
+// Operación que modifica un paciente en la base de datos
+const modifyPaciente = (async (nombrePac, apellidoPac, nacimientoPac, telefonoPac, emailPac, dniPac, usuarioPac, passwordPac) => {
+    const result = await db('paciente').where({ dni: dniPac }).update({
+        nombre: nombrePac,
+        apellido: apellidoPac,
+        nacimiento: nacimientoPac,
+        telefono: telefonoPac,
+        email:emailPac,
+        usuario: usuarioPac,
+        password: passwordPac
+    }); 
     return result;
 });
  
 // Operación que elimina una ciudad de la base de datos
-const removePaciente = (async (cityName) => {
-    const result = await db('clinica').del().where({name: cityName});
- 
+const removePaciente = (async (dniPac) => {
+    const result = await db('paciente').del().where({dni: dniPac}); 
     return result;
 });
  
