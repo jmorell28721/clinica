@@ -11,7 +11,7 @@
 CREATE TABLE Consulta(
 	Id_Consulta INT PRIMARY KEY NOT NULL,
 	Fecha DATE,
-	Hora INT,
+	Hora VARCHAR(6)
 	);
 
 CREATE TABLE Medico (
@@ -38,3 +38,18 @@ ALTER TABLE Medico ADD CONSTRAINT FK_Id_Medico_Especialidad FOREING KEY (Id_Espe
 
 ALTER TABLE Especialidad ADD Id_Medico INT;
 ALTER TABLE Especialidad ADD CONSTRAINT FK_Especialidad_Medico FOREING KEY (Id_Medico) REFERENCES Medico(Id_Medico);
+
+ALTER TABLE Especialidad ADD Id_Medico INT;
+ALTER TABLE Especialidad ADD CONSTRAINT FK_Especialidad_Medico FOREING KEY (Id_Medico) REFERENCES Medico(Id_Medico);
+	
+INSERT INTO Paciente (Id_Paciente, Nombre, Apellido, DNI, Fecha_nac) VALUES (1, 'Juan', 'Perez', '17020407R', '1990-01-01');
+INSERT INTO Paciente (Id_Paciente, Nombre, Apellido, DNI, Fecha_nac) VALUES (2, 'María', 'Gomez', '47204070T', '1985-05-03');
+
+INSERT INTO Consulta (Id_Conulta, Fecha, Hora) VALUES (1, '2024-12-18',12:00);   	
+INSERT INTO Consulta (Id_Conulta, Fecha, Hora) VALUES (2, '2024-11-21',10:00); 	
+
+INSTERT INTO Medico (Id_Medico, Nombre, Apellido, DNI, Fecha_nac) VALUES (1, 'Luis', 'Martinez', '17315284F', '1991-07-07');
+INSTERT INTO Medico (Id_Medico, Nombre, Apellido, DNI, Fecha_nac) VALUES (1, 'Alejando', 'Gutierrez', '26426373G', '1989-03-21');
+
+INSERT INTO Especialidad(Id_Especialidad, Nombre) VALUES (1, Medicina General);
+INSERT INTO Especialidad(Id_Especialidad, Nombre) VALUES (2, Cardiología);
