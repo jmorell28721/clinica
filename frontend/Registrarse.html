@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-witdh, initial-scale=1.0">
+        <title>Registrarse</title>
+        <link rel="icon" href="./imagenes/logo.PNG" type="image/png">
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <header>
+        <a href="index.html"><img src="./imagenes/logo.PNG" alt="" width="150px" height="150px"></a>
+        <nav>
+            <a href="Inicio_sesion.html">Iniciar Sesión</a>
+            <a href="Registrarse.html">Registrarse</a>
+            <a href="Pedir cita.html">Pedir Cita</a>
+            <a href="conocenos.html">Conócenos</a>
+        </nav>
+        <h1>clinica</h1>
+    </header>
+    <body>
+        <form>
+            <label for="Nombre">Nombre</label>
+            <input type="text" name="nombre" id="Nombre" required>
+            <label for="Apellidos">Apellidos</label>
+            <input type="text" name="Apellidos" id="Apellidos" required>
+            <label for="Nacimiento">Fecha de Nacimiento</label>
+            <input type="date" name="nacimiento" id="nacimiento" required>
+            <label for="Introduce telefono">Teléfono</label>
+            <input type="tel" name="telefono" id="telefono" required>
+            <label for="DNI">DNI</label>
+            <input type="text" id="DNI" required>
+            <label for="Introduce email">Email</label>
+            <input type="email" name="Email" id="Email" required>
+            <label for="Usuario">Usuario</label>
+            <input type="text" name="Usuario" id="Usuario" required>
+            <label for="pass">Contraseña</label>
+            <input type="password" name="Contraseña" id="Contraseña" pattern="\d{8}[A-Za-z]" required>
+            <button type="submit">Enviar</button>
+        </form>
+    </body>
+    <footer>
+        <p>&copy; 2025 CLINICA. Todos los derechos reservados.</p>
+    </footer>
