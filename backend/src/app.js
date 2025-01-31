@@ -1,4 +1,6 @@
 const express = require('express');
+
+const cities = require('./route/pacientes.js');
  
 const app = express();
 app.use(express.json());
