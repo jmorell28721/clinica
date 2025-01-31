@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-witdh, initial-scale=1.0">
-        <title>CLINICA</title>
+        <title>Iniciar Sesión</title>
         <link rel="icon" href="./imagenes/logo.PNG" type="image/png">
         <link rel="stylesheet" href="index.css">
     </head>
@@ -18,9 +18,18 @@
         <h1>clinica</h1>
     </header>
     <body>
-        <img src="./imagenes/clinica.jpg" alt="">
-    </body>
+        <form>
+            <label for="Usuario">Usuario</label>
+            <input type="text" name="Usuario" id="Usuario" required>
+            <label for="Introduce email">Email</label>
+            <input type="email" name="Email" id="Email" required>
+            <label for="pass">Contraseña</label>
+            <input type="password" name="Contraseña" id="Contraseña" pattern="\d{8}[A-Za-z]" required>
+            <button type="submit">Enviar</button>
+        </form>
+        <p>Si todavía no te has registrado, puedes hacerlo aqui</p><a href="Registrarse.html"></a>
     <footer>
         <p>&copy; 2025 CLINICA. Todos los derechos reservados.</p>
     </footer>
+    </body>
 </html>
