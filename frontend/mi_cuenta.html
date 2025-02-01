@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-witdh, initial-scale=1.0">
+        <title>CLINICA</title>
+        <link rel="icon" href="./imagenes/logo.PNG" type="image/png">
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <header>
+        <a href="index.html"><img src="./imagenes/logo.PNG" alt="" width="150px" height="150px"></a>
+        <nav>
+            <a href="Inicio_sesion.html">Iniciar Sesión</a>
+            <a href="Registrarse.html">Registrarse</a>
+            <a href="Pedir_cita.html">Pedir Cita</a>
+            <a href="conocenos.html">Conócenos</a>
+        </nav>
+        <h1>clinica</h1>
+    </header>
+
+    <body>
+        <!DOCTYPE html>
+<html>
+<head>
+    <title>Gestión de Cuenta</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h2>Gestión de Cuenta</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo Electrónico</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Juan Pérez</td>
+                <td>juan@example.com</td>
+                <td>
+                    <button onclick="editar(1)">Editar</button>
+                    <button onclick="eliminar(1)">Eliminar</button>
+                </td>
+            </tr>
+            <!-- Aquí puedes añadir más filas según sea necesario -->
+        </tbody>
+    </table>
+
+    <h3>Crear Nueva Cuenta</h3>
+    <form id="crearCuentaForm">
+        <label for="nombre">Nombre:</label><br>
+        <input type="text" id="nombre" name="nombre"><br>
+        <label for="email">Correo Electrónico:</label><br>
+        <input type="email" id="email" name="email"><br><br>
+        <button type="submit">Crear</button>
+    </form>
+
+    <script>
+        function editar(id) {
+            // Lógica para editar una cuenta
+            console.log("Editar cuenta con ID:", id);
+        }
+
+        function eliminar(id) {
+            // Lógica para eliminar una cuenta
+            console.log("Eliminar cuenta con ID:", id);
+        }
+
+        document.getElementById("crearCuentaForm").onsubmit = function(event) {
+            event.preventDefault();
+            // Lógica para crear una nueva cuenta
+            const nombre = document.getElementById("nombre").value;
+            const email = document.getElementById("email").value;
+            console.log("Crear nueva cuenta:", nombre, email);
+        }
+    </script>
+</body>
+</html>
+
+    </body>
