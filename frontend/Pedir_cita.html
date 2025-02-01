@@ -23,15 +23,85 @@
                 <label for="opciones">Elige una opción:</label>
                 <select id="opciones" name="opciones"required>
                     <option value="-">-</option>
-                    <option value="Dentista">Dentista</option>
-                    <option value="Ginecología">Ginecología</option>
-                    <option value="Urología">Urología</option>
-                    <option value="-Medicina General">Medicina General</option>
+                    <option value="medicinageneral">Medicina General</option>
+                    <option value="cardiologia">Cardiología</option>
+                    <option value="alergología">Alergología</option>
+                    <option value="pediatria">Pediatría</option>
+                    <option value="general">Cirugía General</option>
+                    <option value="genetica">Genética</option>
                 </select>
                 <label for="dia">Dia</label>
                 <input type="date">
                 <label for="hora">Hora</label>
                 <input type="time">
+                <button id="submit">Solicitar Cita</button>
+                <div id="mensaje"></div>
             </form>
         </main>
+        <script>
+            const API_URL = 'http://localhost:8080/usuarioLogin';
+            function login() {
+                const credenciales = {
+                    username: 'usuario',
+                    email: 'correo',
+                    pass: 'contraseña'
+                };
+            
+                fetch('http://localhost:/8080/usuarioLogin'), {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(credenciales)
+                }
+            
+                .then(Response => response.json())
+                .then(data => {
+                    if (data.token) {
+                        localStorage.setItem('authToken');
+                        alert('Inicio de sesión correcto');
+                    }
+            
+                    else {
+                        alert('Inicio de sesión fallido')
+                    }
+                })
+            
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al iniciar sesión')
+                });
+            }
+            
+            function solicitarcita() {
+                const token = localStorage.getItem('authToken');
+            
+                if (!token) {
+                    document.getElementById(mensaje).textContent = "Por favor, inicia sesión para pedir cita";
+                    return;
+                }
+            
+                fetch(API_URL, {
+                    method: 'GET',
+                    headers: {
+                        'Auth': token
+                    }
+                })
+            
+                .then(response => response.json())
+                .then(data => {
+                    if (data.mensaje === 'Usuario logueado')  {
+                        document.getElementById('mensaje').textContent = "Cita solicitada con éxito";
+                    }
+            
+                    else {
+                        document.getElementById('mensaje').textContent = "Inicia sesión para solicitar cita";
+                    }
+                })
+                .catch(error => {
+                    document.getElementById("mensaje").textContent = "Error al verificar el estado de la sesión";
+                    console.error('Error:', error);
+                })
+            }
+            </script>
     </body>
