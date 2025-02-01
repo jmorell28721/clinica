@@ -18,90 +18,113 @@
         <h1>clinica</h1>
     </header>
     <body>
-        <main>
-            <form>
-                <label for="opciones">Elige una opción:</label>
-                <select id="opciones" name="opciones"required>
-                    <option value="-">-</option>
-                    <option value="medicinageneral">Medicina General</option>
-                    <option value="cardiologia">Cardiología</option>
-                    <option value="alergología">Alergología</option>
-                    <option value="pediatria">Pediatría</option>
-                    <option value="general">Cirugía General</option>
-                    <option value="genetica">Genética</option>
-                </select>
-                <label for="dia">Dia</label>
-                <input type="date">
-                <label for="hora">Hora</label>
-                <input type="time">
-                <button id="submit">Solicitar Cita</button>
-                <div id="mensaje"></div>
-            </form>
-        </main>
+        <h2>Gestión de Consultas</h2>
+        <table id="crearconsulta">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Medico</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>2025-01-05</td>
+                    <td>16:00</td>
+                    <td>1</td>
+                    <td>
+                        <button onclick="editar(1)">Editar</button>
+                        <button onclick="eliminar(1)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form><h3>PEDIR CITA</h3>
+            <label for="opciones">Elige una opción:</label>
+            <select id="opciones" name="opciones"required>
+                <option value="-">-</option>
+                <option value="medicinageneral">Medicina General</option>
+                <option value="cardiologia">Cardiología</option>
+                <option value="alergología">Alergología</option>
+                <option value="pediatria">Pediatría</option>
+                <option value="general">Cirugía General</option>
+                <option value="genetica">Genética</option>
+            </select>
+            <label for="dia">Dia</label>
+            <input type="date">
+            <label for="hora">Hora</label>
+            <input type="time">
+            <button id="submit">Solicitar Cita</button>
+            <div id="mensaje"></div>
+        </form>
+
         <script>
-            const API_URL = 'http://localhost:8080/usuarioLogin';
-            function login() {
-                const credenciales = {
-                    username: 'usuario',
-                    email: 'correo',
-                    pass: 'contraseña'
-                };
-            
-                fetch('http://localhost:/8080/usuarioLogin'), {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(credenciales)
-                }
-            
-                .then(Response => response.json())
-                .then(data => {
-                    if (data.token) {
-                        localStorage.setItem('authToken');
-                        alert('Inicio de sesión correcto');
-                    }
-            
-                    else {
-                        alert('Inicio de sesión fallido')
-                    }
-                })
-            
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Error al iniciar sesión')
+
+            function actualizarTabla() {
+                const table = document.getElementById("crearconsulta").getElementsByTagName("tbody")[0];
+                table.innerHTML = "";
+                consultas.forEach(consultas => {
+                    const row = table.insertRow();
+                    row.innerHTML = `
+                        <td>${consultas.id}</td>
+                        <td>${consultas.Fecha}</td>
+                        <td>${consultas.Hora}</td>
+                        <td>${consultas.Medico}</td>
+                        <td>
+                            <button onclick="editar(${consultas.id})">Editar</button>
+                            <button onclick="eliminar(${consultas.id})">Eliminar</button>
+                        </td>
+                    `;
                 });
             }
-            
-            function solicitarcita() {
-                const token = localStorage.getItem('authToken');
-            
-                if (!token) {
-                    document.getElementById(mensaje).textContent = "Por favor, inicia sesión para pedir cita";
-                    return;
-                }
-            
-                fetch(API_URL, {
-                    method: 'GET',
-                    headers: {
-                        'Auth': token
-                    }
-                })
-            
-                .then(response => response.json())
-                .then(data => {
-                    if (data.mensaje === 'Usuario logueado')  {
-                        document.getElementById('mensaje').textContent = "Cita solicitada con éxito";
-                    }
-            
-                    else {
-                        document.getElementById('mensaje').textContent = "Inicia sesión para solicitar cita";
-                    }
-                })
-                .catch(error => {
-                    document.getElementById("mensaje").textContent = "Error al verificar el estado de la sesión";
-                    console.error('Error:', error);
-                })
+
+            const consultas = [
+            { id: 1, Fecha: "2025-01-05", Hora: "16:00", Medico: "1" }
+        ];
+
+        function editar(id) {
+            const nuevoid= consultas.find(consultas=> consultas.id === id);
+            const nuevaFecha = prompt("Nueva Fecha:", consultas.Fecha);
+            const nuevaHora = prompt("Nuevo hora:", consultas.Hora);
+            const nuevoMedico = prompt("Nuevo Medico:", consultas.Medico);
+            if (nuevaFecha && nuevaHora && nuevoMedico) {
+                consultas.Fecha = nuevaFecha;
+                consultas.Hora = nuevaHora;
+                consultas.Medico = nuevoMedico;
+                actualizarTabla();
             }
-            </script>
-    </body>
+        }
+
+        function eliminar(id) {
+            const index = consultas.findIndex(consultas => consultas.id === id);
+            if (index !== -1) {
+                consultas.splice(index, 1);
+                actualizarTabla();
+            }
+        }
+
+        document.getElementById("crearconsulta").onsubmit = function(event) {
+            event.preventDefault();
+            const Fecha = document.getElementById("Fecha").value;
+            const Hora = document.getElementById("Hora").value;
+            const Medico = document.getElementById("Medico").value
+            if (nombre && email && contraseña) {
+                const id = consultas.length ? consultas[consultas.length - 1].id + 1 : 1;
+                consultas.push({ id, Fecha, Hora, Medico });
+                actualizarTabla();
+            }
+        }
+
+        function guardarCambios() {
+            console.log("Guardar cambios:", cuentas);
+            
+        }
+
+        actualizarTabla();
+    </script>
+</body>
+</html>
