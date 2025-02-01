@@ -1,22 +1,12 @@
 const express = require('express');
-
-const cities = require('./route/pacientes.js');
+const cors = require('cors');
+const pacientes = require('./route/pacientes.js');
  
 const app = express();
+app.use(cors());
 app.use(express.json());
  
-const pacientes = [
-    {
-        'nombre': 'Slilma',
-        'apellido': 'Delvie',
-        'fechaNac': '10/10/1996'
-    }    
-];
- 
-app.get('/pacientes', (req, res) => {
-    res.json(pacientes);
-});
- 
+app.use('/', pacientes);
 
  
 app.listen(8080, () => {

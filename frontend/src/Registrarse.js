@@ -1,51 +1,68 @@
 import axios from 'axios';
 import { notifyError, notifyOk } from './dialogUtil.js';
-import { el } from './documentUtil.js';
 
- 
+
+/**
+ * Añade una ciudad a la lista
+ * 
+ * @param {string} name 
+ */
+
+function addPacienteNode(name) {
+    const pacientesUl = document.getElementById('pacientes');
+
+    // Crea y añade un nuevo elemento en la lista
+    const item = document.createElement('li');
+    item.className = 'list-group-item';
+    item.appendChild(document.createTextNode(name));
+
+    // Crea y añade el botón X para eliminar la ciudad
+    const button = document.createElement('button');
+    button.className = 'btn-close'
+    button.onclick = function() {  
+        addPaciente();      
+        item.remove();
+    };
+    item.appendChild(button);
+
+    pacientesUl.appendChild(item);
+};
+  
 window.addPaciente = function() {
-    const nombrePac = el('nombre').value;
-    const apellidoPac = el('apellido').value;
-    const nacimientoPac = el('nacimiento').value;
-    const telefonoPac = el('telefono').value;
-    const emailPac = el('email').value;
-    const dniPac = el('dni').value;
-    const usuarioPac = el('usuario').value;
-    const passwordPac = el('pasword').value;
-
+    const nombre = document.getElementById('nombre').value;;
+    const apellido = document.getElementById('apellido').value;
+    const nacimiento = document.getElementById('nacimiento').value;
+    const telefono = document.getElementById('telefono').value;
+    const email = document.getElementById('email').value;
+    const dni = document.getElementById('dni').value;
+    const usuario = document.getElementById('usuario').value;
+    const password = document.getElementById('password').value;
 
     // TODO Validación de datos
-    if (usuarioPac === '') {
+    if (usuario === '') {
         notifyError('El usuario es un campo obligatorio');
         return;
     }
-    if (passwordPac === '') {
+    if (password === '') {
         notifyError('La contraseña es un campo obligatorio');
         return;
     }
 
     axios.post('http://localhost:8080/pacientes', {
-        nombre: nombrePac,
-        apellido: apellidoPac,
-        nacimiento: nacimientoPac,
-        telefono: telefonoPac,
-        email:emailPac,
-        dni: dniPac,
-        usuario: usuarioPac,
-        password: passwordPac
+        nombre: nombre,
+        apellido: apellido,
+        nacimiento: nacimiento,
+        telefono: telefono,
+        email:email,
+        dni: dni,
+        usuario: usuario,
+        password: password
+    }).then(()=>{
+        addPacienteNode(nombre);
     });
 
     // TODO Confirmar al usuario que todo ha ido bien (o mal)
     notifyOk('Paciente registrado');
 
-    // TODO Limpiar el formulario
-    el('nombre').value;
-    el('apellido').value;
-    el('nacimiento').value;
-    el('telefono').value;
-    el('email').value;
-    el('dni').value;
-    el('usuario').value;
-    el('pasword').value;
 };
  

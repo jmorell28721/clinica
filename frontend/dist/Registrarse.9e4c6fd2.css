@@ -1,0 +1,115 @@
+header {
+  color: #6a6a6a;
+  background-color: #0ff;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  display: flex;
+}
+
+header nav {
+  gap: 10px;
+  display: flex;
+}
+
+header img {
+  max-width: 75px;
+  max-height: 75px;
+}
+
+body {
+  text-align: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+body img {
+  width: 100%;
+  height: 800px;
+}
+
+footer {
+  color: #fff;
+  text-align: center;
+  background-color: #333;
+  align-items: end;
+  width: 100%;
+  padding: 5px 0;
+  position: fixed;
+  bottom: 0;
+}
+
+form {
+  text-align: center;
+  flex-direction: column;
+  width: 50%;
+  margin-left: 25%;
+  display: flex;
+}
+
+form label {
+  margin-bottom: 10px;
+}
+
+form input, form textarea {
+  border: 1px solid #ccc;
+  border-radius: 500px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+form button {
+  color: #fff;
+  cursor: pointer;
+  background-color: #333;
+  border: none;
+  border-radius: 50px;
+  padding: 10px;
+}
+
+form button:hover {
+  background-color: #555;
+}
+
+a {
+  color: #6a6a6a;
+}
+
+h1, h2, h3, h4 {
+  text-align: center;
+  margin: 20px 0;
+  text-decoration: underline;
+}
+
+section {
+  text-align: center;
+  width: 80%;
+  margin: 20px auto;
+  line-height: 60%;
+}
+
+.Especialidades {
+  text-align: center;
+  text-transform: uppercase;
+  width: 80%;
+  margin: auto;
+  font-size: medium;
+  line-height: 40%;
+  position: static;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table, th, td {
+  border: 1px solid #000;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+/*# sourceMappingURL=Registrarse.9e4c6fd2.css.map */

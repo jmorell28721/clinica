@@ -3,10 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-witdh, initial-scale=1.0">
-        <title>Registrarse</title>
+        <title>Iniciar Sesión</title>
         <link rel="icon" href="./imagenes/logo.jpg" >
         <link rel="stylesheet" href="index.css">
-        <script type="module" src="./src/Registrarse.js"></script>
     </head>
     <header>
         <a href="index.html"><img src="./imagenes/logo.jpg" alt="" width="150px" height="150px"></a>
@@ -20,26 +19,19 @@
     </header>
     <body>
         <form>
-            <label for="Nombre">Nombre</label>
-            <input type="text" name="nombre" id="nombre" required>
-            <label for="Apellidos">Apellidos</label>
-            <input type="text" name="apellidos" id="apellido" required>
-            <label for="Nacimiento">Fecha de Nacimiento</label>
-            <input type="date" name="nacimiento" id="nacimiento" required>
-            <label for="telefono">Teléfono</label>
-            <input type="tel" name="telefono" id="telefono" required>
-            <label for="dni">DNI</label>
-            <input type="text" name="dni" id="dni" required>
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" required>
             <label for="usuario">Usuario</label>
             <input type="text" name="usuario" id="usuario" required>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" required>
             <label for="pass">Contraseña</label>
-            <input type="password" name="password" id="password" required>
-            <button type="button" onclick="addPaciente()">Enviar</button>
+            <input type="password" name="contraseña" id="contraseña" pattern="\d{8}[A-Za-z]" required>
+            <button type="submit">Enviar</button>
         </form>
+        <p>Si todavía no te has registrado, puedes hacerlo aqui <a href="./Registrarse.html">Registrarse</a></p>
+
     </body>
     <footer>
         <p>&copy; 2025 CLINICA. Todos los derechos reservados.</p>
     </footer>
+    </body>
 </html>
