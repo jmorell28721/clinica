@@ -1,4 +1,4 @@
-const {findUsuarioLogin, registerUsuarioLog, modifyUsuarioLog, removeUsuarioLog} = require('../service/UsuarioLogin.js')
+const {findUsuarioLogin, registerUsuarioLog, modifyUsuarioLog, removeUsuarioLog} = require('../service/usuariosLogin.js')
 
  
 // Operación que devuelve un paciente determinado

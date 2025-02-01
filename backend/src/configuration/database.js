@@ -4,7 +4,8 @@ const knex = require('knex');
 const db = knex({
     client: 'sqlite3',
     connection: {
-        filename: 'clinica.db'        
+        filename: 'pacientes.db',
+        filename: 'usuariosLogin.db'
     },
     useNullAsDefault: true
 });
