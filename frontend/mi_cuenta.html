@@ -19,79 +19,108 @@
     </header>
 
     <body>
-        <!DOCTYPE html>
-<html>
-<head>
-    <title>Gestión de Cuenta</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-    </style>
-</head>
-<body>
-    <h2>Gestión de Cuenta</h2>
+        <h2>Gestión de Cuenta</h2>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Correo Electrónico</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>Juan Pérez</td>
-                <td>juan@example.com</td>
-                <td>
-                    <button onclick="editar(1)">Editar</button>
-                    <button onclick="eliminar(1)">Eliminar</button>
-                </td>
-            </tr>
-            <!-- Aquí puedes añadir más filas según sea necesario -->
-        </tbody>
-    </table>
+        <table id="cuentaTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Correo Electrónico</th>
+                    <th>Contraseña</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Juan Pérez</td>
+                    <td>juan@example.com</td>
+                    <td>1234</td>
+                    <td>
+                        <button onclick="editar(1)">Editar</button>
+                        <button onclick="guardar(1)">Guardar Cambios</button>
+                        <button onclick="eliminar(1)">Eliminar</button>
 
-    <h3>Crear Nueva Cuenta</h3>
-    <form id="crearCuentaForm">
-        <label for="nombre">Nombre:</label><br>
-        <input type="text" id="nombre" name="nombre"><br>
-        <label for="email">Correo Electrónico:</label><br>
-        <input type="email" id="email" name="email"><br><br>
-        <button type="submit">Crear</button>
-    </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-    <script>
+        <h3>Crear Nueva Cuenta</h3>
+
+        <form id="crearCuentaForm">
+            <label for="nombre">Nombre:</label><br>
+            <input type="text" id="nombre" name="nombre"><br>
+            <label for="email">Correo Electrónico:</label><br>
+            <input type="email" id="email" name="email"><br><br>
+            <input type="password" id="contraseña" name="contraseña">contraseña<br><br>
+            <button type="submit">Crear</button>
+        </form>
+
+        <script>
+
+            function actualizarTabla() {
+                const table = document.getElementById("cuentaTable").getElementsByTagName("tbody")[0];
+                table.innerHTML = "";
+                cuentas.forEach(cuenta => {
+                    const row = table.insertRow();
+                    row.innerHTML = `
+                        <td>${cuenta.id}</td>
+                        <td>${cuenta.nombre}</td>
+                        <td>${cuenta.email}</td>
+                        <td>${cuenta.contraseña}</td>
+                        <td>
+                            <button onclick="editar(${cuenta.id})">Editar</button>
+                            <button onclick="eliminar(${cuenta.id})">Eliminar</button>
+                        </td>
+                    `;
+                });
+            }
+
+            const cuentas = [
+            { id: 1, nombre: "Juan Pérez", email: "juan@example.com" }
+        ];
+
         function editar(id) {
-            // Lógica para editar una cuenta
-            console.log("Editar cuenta con ID:", id);
+            const cuenta = cuentas.find(cuenta => cuenta.id === id);
+            const nuevoNombre = prompt("Nuevo nombre:", cuenta.nombre);
+            const nuevoEmail = prompt("Nuevo correo electrónico:", cuenta.email);
+            const nuevaContraseña = prompt("Nueva Contraseña:", cuenta.contraseña);
+            if (nuevoNombre && nuevoEmail && nuevaContraseña) {
+                cuenta.nombre = nuevoNombre;
+                cuenta.email = nuevoEmail;
+                cuenta.contraseña = nuevaContraseña;
+                actualizarTabla();
+            }
         }
 
         function eliminar(id) {
-            // Lógica para eliminar una cuenta
-            console.log("Eliminar cuenta con ID:", id);
+            const index = cuentas.findIndex(cuenta => cuenta.id === id);
+            if (index !== -1) {
+                cuentas.splice(index, 1);
+                actualizarTabla();
+            }
         }
 
         document.getElementById("crearCuentaForm").onsubmit = function(event) {
             event.preventDefault();
-            // Lógica para crear una nueva cuenta
             const nombre = document.getElementById("nombre").value;
             const email = document.getElementById("email").value;
-            console.log("Crear nueva cuenta:", nombre, email);
+            const contraseña = document.getElementById("contraseña").value
+            if (nombre && email && contraseña) {
+                const id = cuentas.length ? cuentas[cuentas.length - 1].id + 1 : 1;
+                cuentas.push({ id, nombre, email, contraseña });
+                actualizarTabla();
+            }
         }
+
+        function guardarCambios() {
+            console.log("Guardar cambios:", cuentas);
+            
+        }
+
+        actualizarTabla();
     </script>
 </body>
 </html>
-
-    </body>
