@@ -1,11 +1,9 @@
-CREATE TABLE Paciente (
+CREATE TABLE Pacientes (
 	Id_Paciente INT PRIMARY KEY NOT NULL,
 	Nombre VARCHAR (20) NOT NULL,
 	Apellido VARCHAR(50) NOT NULL,	
 	DNI VARCHAR(10) NOT NULL,
 	Nacimiento DATE,
-	Correo VARCHAR(50) NOT NULL,
-	Contraseña VARCHAR(50) NOT NULL
 	);
 
 CREATE TABLE Consulta(
@@ -27,11 +25,11 @@ CREATE TABLE Especialidad (
 	Nombre VARCHAR(20) NOT NULL,
 	);
 
-CREATE TABLE Login (
+CREATE TABLE UsuariosLogin (
 	Id_Login INT PRIMARY KEY NOT NULL,
 	Usuario VARCHAR (20) NOT NULL,
 	Email VARCHAR(50) NOT NULL,
-	Contraseña VARCHAR(50) NOT NULL
+	Password VARCHAR(50) NOT NULL
 	);
 
 CREATE TABLE Tiene (
@@ -40,7 +38,7 @@ CREATE TABLE Tiene (
 	);    
 	
 ALTER TABLE Consulta ADD Id_Paciente INT;
-ALTER TABLE Consulta ADD CONSTRAINT FK_Id_Consulta_Paciente FOREING KEY (Id_Paciente) REFERENCES Paciente (Id_Paciente);
+ALTER TABLE Consulta ADD CONSTRAINT FK_Id_Consulta_Paciente FOREING KEY (Id_Paciente) REFERENCES Pacientes (Id_Paciente);
 
 ALTER TABLE Consulta ADD Id_Medico INT;
 ALTER TABLE Consulta ADD CONSTRAINT FK_Id_Consulta_Medico FOREING KEY (Id_Medico) REFERENCES Medico (Id_Medico);	
@@ -54,11 +52,11 @@ ALTER TABLE Especialidad ADD CONSTRAINT FK_Especialidad_Medico FOREING KEY (Id_M
 ALTER TABLE Especialidad ADD Id_Medico INT;
 ALTER TABLE Especialidad ADD CONSTRAINT FK_Especialidad_Medico FOREING KEY (Id_Medico) REFERENCES Medico(Id_Medico);
 
-ALTER TABLE Login ADD Id_Paciente INT;
-ALTER TABLE Login ADD CONSTRAINT FK_Login_Paciente FOREING KEY (Id_Paciente) REFERENCES Paciente (Id_Paciente);
+ALTER TABLE UsuariosLogin ADD Id_Paciente INT;
+ALTER TABLE UsuariosLogin ADD CONSTRAINT FK_UsuarioLogin_Paciente FOREING KEY (Id_Paciente) REFERENCES Pacientes (Id_Paciente);
 	    
-INSERT INTO Paciente (Id_Paciente, Nombre, Apellido, DNI, Nacimiento) VALUES (1, 'Juan', 'Perez', '17020407R', '1990-01-01');
-INSERT INTO Paciente (Id_Paciente, Nombre, Apellido, DNI, Nacimiento) VALUES (2, 'María', 'Gomez', '47204070T', '1985-05-03');
+INSERT INTO Pacientes (Id_Paciente, Nombre, Apellido, DNI, Nacimiento) VALUES (1, 'Juan', 'Perez', '17020407R', '1990-01-01');
+INSERT INTO Pacientes (Id_Paciente, Nombre, Apellido, DNI, Nacimiento) VALUES (2, 'María', 'Gomez', '47204070T', '1985-05-03');
 
 INSERT INTO Consulta (Id_Consulta, Fecha, Hora) VALUES (1, '2024-12-18',12:00);   	
 INSERT INTO Consulta (Id_Consulta, Fecha, Hora) VALUES (2, '2024-11-21',10:00); 	
@@ -69,5 +67,5 @@ INSTERT INTO Medico (Id_Medico, Nombre, Apellido, DNI, Nacimiento) VALUES (1, 'A
 INSERT INTO Especialidad(Id_Especialidad, Nombre) VALUES (1, Medicina General);
 INSERT INTO Especialidad(Id_Especialidad, Nombre) VALUES (2, Cardiología);
 
-INSERT INTO Login(Id_login, Usuario, Email, Contraseña, Id_paciente) VALUES (Id1, 'JuanJ', 'juanperez@gmail.com', '1234', 1);
-INSERT INTO Login(Id_login, Usuario, Email, Contraseña, Id_paciente) VALUES (Id2, 'MaríaG', 'mariagomez@gmail.com', '0000', 2); 
+INSERT INTO UsuariosLogin(Id_UsuarioLogin, Usuario, Email, Password, Id_paciente) VALUES (Id1, 'JuanJ', 'juanperez@gmail.com', '1234', 1);
+INSERT INTO UsuariosLogin(Id_UsuarioLogin, Usuario, Email, Password, Id_paciente) VALUES (Id2, 'MaríaG', 'mariagomez@gmail.com', '0000', 2); 
