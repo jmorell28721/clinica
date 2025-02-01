@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-witdh, initial-scale=1.0">
+        <title>CLINICA</title>
+        <link rel="icon" href="./imagenes/logo.PNG" type="image/png">
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <header>
+        <a href="index.html"><img src="./imagenes/logo.PNG" alt="" width="150px" height="150px"></a>
+        <nav>
+            <a href="Inicio_sesion.html">Iniciar Sesión</a>
+            <a href="Registrarse.html">Registrarse</a>
+            <a href="Pedir_cita.html">Pedir Cita</a>
+            <a href="conocenos.html">Conócenos</a>
+        </nav>
+        <h1>clinica</h1>
+    </header>
+    <body>
+        <main>
+            <form>
+                <label for="opciones">Elige una opción:</label>
+                <select id="opciones" name="opciones"required>
+                    <option value="-">-</option>
+                    <option value="medicinageneral">Medicina General</option>
+                    <option value="cardiologia">Cardiología</option>
+                    <option value="alergología">Alergología</option>
+                    <option value="pediatria">Pediatría</option>
+                    <option value="general">Cirugía General</option>
+                    <option value="genetica">Genética</option>
+                </select>
+                <label for="dia">Dia</label>
+                <input type="date">
+                <label for="hora">Hora</label>
+                <input type="time">
+                <button id="submit">Solicitar Cita</button>
+                <div id="mensaje"></div>
+            </form>
+        </main>
+        <script>
+            const API_URL = 'http://localhost:8080/usuarioLogin';
+            function login() {
+                const credenciales = {
+                    username: 'usuario',
+                    email: 'correo',
+                    pass: 'contraseña'
+                };
+            
+                fetch('http://localhost:/8080/usuarioLogin'), {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(credenciales)
+                }
+            
+                .then(Response => response.json())
+                .then(data => {
+                    if (data.token) {
+                        localStorage.setItem('authToken');
+                        alert('Inicio de sesión correcto');
+                    }
+            
+                    else {
+                        alert('Inicio de sesión fallido')
+                    }
+                })
+            
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al iniciar sesión')
+                });
+            }
+            
+            function solicitarcita() {
+                const token = localStorage.getItem('authToken');
+            
+                if (!token) {
+                    document.getElementById(mensaje).textContent = "Por favor, inicia sesión para pedir cita";
+                    return;
+                }
+            
+                fetch(API_URL, {
+                    method: 'GET',
+                    headers: {
+                        'Auth': token
+                    }
+                })
+            
+                .then(response => response.json())
+                .then(data => {
+                    if (data.mensaje === 'Usuario logueado')  {
+                        document.getElementById('mensaje').textContent = "Cita solicitada con éxito";
+                    }
+            
+                    else {
+                        document.getElementById('mensaje').textContent = "Inicia sesión para solicitar cita";
+                    }
+                })
+                .catch(error => {
+                    document.getElementById("mensaje").textContent = "Error al verificar el estado de la sesión";
+                    console.error('Error:', error);
+                })
+            }
+            </script>
+    </body>
