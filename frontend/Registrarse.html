@@ -6,6 +6,7 @@
         <title>Registrarse</title>
         <link rel="icon" href="./imagenes/logo.PNG" type="image/png">
         <link rel="stylesheet" href="index.css">
+        <script type = 'module' src="Registrarse.js"></script>
     </head>
     <header>
         <a href="index.html"><img src="./imagenes/logo.PNG" alt="" width="150px" height="150px"></a>
@@ -34,8 +35,8 @@
             <label for="Usuario">Usuario</label>
             <input type="text" name="usuario" id="usuario" required>
             <label for="pass">Contraseña</label>
-            <input type="password" name="password" id="password" pattern="\d{8}[A-Za-z]" required>
-            <button type="submit">Enviar</button>
+            <input type="password" name="password" id="password"  required>
+            <button type="button"  onClick="addPaciente()">Enviar </button>
         </form>
     </body>
     <footer>

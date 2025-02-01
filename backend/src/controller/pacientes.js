@@ -1,4 +1,4 @@
-const { findAllPacientes, findPaciente, registerPaciente, modifyPaciente, removePaciente} = require('../service/registrarse.js');
+const { findAllPacientes, findPaciente, registerPaciente, modifyPaciente, removePaciente} = require('../service/pacientes.js');
  
 // Operación que devuelve todos los pacientes de la base de datos
 const getPacientes = (async (req, res) => {

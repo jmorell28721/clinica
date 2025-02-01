@@ -2,19 +2,20 @@ const db = require('../configuration/database.js').db;
  
 // Operación que devuelve todos los paciente de la base de datos
 const findAllPacientes = (async () => {
-    const result = await db('paciente').select('*');
+    const result = await db('pacientes').select('*');
     return result;
 });
  
 // Operación que devuelve una paciente determinado
 const findPaciente = (async (dniPaciente) => {
-    const result = await db('paciente').select('*').where({dni: dniPaciente}).first();
+    const result = await db('pacientes').select('*').where({dni: dniPaciente}).first();
     return result;
 });
  
-// Operación que registra una nueva ciudad en la base de datos
-const registerPaciente = (async (nombrePac, apellidoPac, nacimientoPac, telefonoPac, emailPac, dniPac, usuarioPac, passwordPac) => {
-    const result = await db('paciente').insert({
+// Operación que registra un nuevo paciente en la base de datos
+const registerPaciente = (async (id_paciente,nombrePac, apellidoPac, nacimientoPac, telefonoPac, emailPac, dniPac, usuarioPac, passwordPac) => {
+    const result = await db('pacientes').insert({
+        id_paciente: id_paciente,
         nombre: nombrePac,
         apellido: apellidoPac,
         nacimiento: nacimientoPac,
@@ -29,7 +30,7 @@ const registerPaciente = (async (nombrePac, apellidoPac, nacimientoPac, telefono
  
 // Operación que modifica un paciente en la base de datos
 const modifyPaciente = (async (nombrePac, apellidoPac, nacimientoPac, telefonoPac, emailPac, dniPac, usuarioPac, passwordPac) => {
-    const result = await db('paciente').where({ dni: dniPac }).update({
+    const result = await db('pacientes').where({ dni: dniPac }).update({
         nombre: nombrePac,
         apellido: apellidoPac,
         nacimiento: nacimientoPac,
@@ -41,9 +42,9 @@ const modifyPaciente = (async (nombrePac, apellidoPac, nacimientoPac, telefonoPa
     return result;
 });
  
-// Operación que elimina una ciudad de la base de datos
+// Operación que elimina un paciente de la base de datos
 const removePaciente = (async (dniPac) => {
-    const result = await db('paciente').del().where({dni: dniPac}); 
+    const result = await db('pacientes').del().where({dni: dniPac}); 
     return result;
 });
  
